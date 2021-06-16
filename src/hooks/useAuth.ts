@@ -6,7 +6,7 @@ function useAuth() {
     const user = jsCookie.get('JSESSIONID');
 
     if (!user) {
-      // document.location.href = '/';
+      document.location.href = '/customLogin';
     } else {
       localStorage.setItem('jsessionId', user);
     }
