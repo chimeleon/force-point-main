@@ -1,15 +1,30 @@
-import jsCookie from 'js-cookie';
 import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { AuthUser } from '../store';
 
 function useAuth() {
-  useEffect(() => {
-    const user = jsCookie.get('JSESSIONID');
+  const [, setAuthUser] = useRecoilState(AuthUser);
 
-    if (!user) {
+  const handle = () => {
+    localStorage.removeItem('jsessionId');
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('jsessionId');
+
+    if (!token) {
       document.location.href = '/customLogin';
     } else {
-      localStorage.setItem('jsessionId', user);
+      setAuthUser(token);
     }
+  },[setAuthUser])
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', handle);
+
+    return () => {
+      window.removeEventListener('beforeunload', handle);
+    };
   }, []);
 }
 

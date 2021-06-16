@@ -22,10 +22,10 @@ import {
   AgentTime,
   Page,
   ListTable,
+  AuthUser,
 } from '../store';
 
 function useMain() {
-  const token = localStorage.getItem('jsessionId');
   const time = useRecoilValue(Time);
   const agentTime = useRecoilValue(AgentTime);
   const counter = useRecoilValue(Counter);
@@ -45,6 +45,7 @@ function useMain() {
 
   const [page, setPage] = useRecoilState(Page);
   const [, setListTable] = useRecoilState(ListTable);
+  const authUser = useRecoilValue(AuthUser);
 
   const onPrevPage = () => {
     setPage((prev) => ({ ...prev, currentPage: prev.currentPage - 1 }));
@@ -55,89 +56,81 @@ function useMain() {
   };
 
   const onSubmit = async () => {
-    if (!token) {
-      alert('Lost session');
-    } else {
-      try {
-        const sortArray = [
-          { name: 'time', sort: time.sort },
-          { name: 'agentTime', sort: agentTime.sort },
-          { name: 'userDim.label', sort: user.sort },
-          { name: 'agent', sort: agent.sort },
-          { name: 'userDim.targetUser.label', sort: person.sort },
-          { name: 'policy', sort: policy.sort },
-          { name: 'application', sort: application.sort },
-          { name: 'category', sort: category.sort },
-          { name: 'matches', sort: matches.sort },
-          { name: 'resource', sort: resource.sort },
-          { name: 'group', sort: group.sort },
-        ];
-  
-        const sortData = sortArray.filter((data) => {
-          return data.sort !== 'none';
-        });
-  
-        await axios
-          .get(
-            `http://3.34.5.214:8080/evidences/9/list?page=${
-              page.currentPage
-            }&size=${counter.value}${
-              user.value !== '' ? `&user=${user.value}` : ''
-            }${agent.value !== '' ? `&agent=${agent.value}` : ''}${
-              person.value !== '' ? `&person=${person.value}` : ''
-            }${policy.value !== '' ? `&policy=${policy.value}` : ''}${
-              application.value !== ''
-                ? `&application=${application.value}`
-                : ''
-            }${category.value !== '' ? `&category=${category.value}` : ''}${
-              matches.value !== '' ? `&matches=${matches.value}` : ''
-            }${resource.value !== '' ? `&resources=${resource.value}` : ''}${
-              group.value !== '' ? `&group=${group.value}` : ''
-            }${
-              sortData[0] ? `&sort=${sortData[0].name},${sortData[0].sort}` : ''
-            }${
-              time.visible
-                ? `&startTime=${moment(startTime.date).format('YYYY-MM-DD')}`
-                : ''
-            }${
-              time.visible
-                ? `&endTime=${moment(endTime.date).format('YYYY-MM-DD')}`
-                : ''
-            }${
-              agentTime.visible
-                ? `&startAgentTime=${moment(startAgentTime.date).format(
-                    'YYYY-MM-DD'
-                  )}`
-                : ''
-            }${
-              agentTime.visible
-                ? `&endAgentTime=${moment(endAgentTime.date).format(
-                    'YYYY-MM-DD'
-                  )}`
-                : ''
-            }
-            `,
-            {
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-                JSESSIONID: token,
-              },
-            }
-          )
-          .then((res) => {
-            const { content, totalPages } = res.data;
+    try {
+      const sortArray = [
+        { name: 'time', sort: time.sort },
+        { name: 'agentTime', sort: agentTime.sort },
+        { name: 'userDim.label', sort: user.sort },
+        { name: 'agent', sort: agent.sort },
+        { name: 'userDim.targetUser.label', sort: person.sort },
+        { name: 'policy', sort: policy.sort },
+        { name: 'application', sort: application.sort },
+        { name: 'category', sort: category.sort },
+        { name: 'matches', sort: matches.sort },
+        { name: 'resource', sort: resource.sort },
+        { name: 'group', sort: group.sort },
+      ];
 
-            setListTable(content);
-            setPage((prev) => ({
-              ...prev,
-              lastPage: totalPages,
-            }));
-          })
-          .catch((err) => console.error(err));
-      } catch (err) {
-        toast(err);
-      }
+      const sortData = sortArray.filter((data) => {
+        return data.sort !== 'none';
+      });
+
+      await axios
+        .get(
+          `/evidences/9/list?page=${page.currentPage}&size=${counter.value}${
+            user.value !== '' ? `&user=${user.value}` : ''
+          }${agent.value !== '' ? `&agent=${agent.value}` : ''}${
+            person.value !== '' ? `&person=${person.value}` : ''
+          }${policy.value !== '' ? `&policy=${policy.value}` : ''}${
+            application.value !== '' ? `&application=${application.value}` : ''
+          }${category.value !== '' ? `&category=${category.value}` : ''}${
+            matches.value !== '' ? `&matches=${matches.value}` : ''
+          }${resource.value !== '' ? `&resources=${resource.value}` : ''}${
+            group.value !== '' ? `&group=${group.value}` : ''
+          }${
+            sortData[0] ? `&sort=${sortData[0].name},${sortData[0].sort}` : ''
+          }${
+            time.visible
+              ? `&startTime=${moment(startTime.date).format('YYYY-MM-DD')}`
+              : ''
+          }${
+            time.visible
+              ? `&endTime=${moment(endTime.date).format('YYYY-MM-DD')}`
+              : ''
+          }${
+            agentTime.visible
+              ? `&startAgentTime=${moment(startAgentTime.date).format(
+                  'YYYY-MM-DD'
+                )}`
+              : ''
+          }${
+            agentTime.visible
+              ? `&endAgentTime=${moment(endAgentTime.date).format(
+                  'YYYY-MM-DD'
+                )}`
+              : ''
+          }
+            `,
+          {
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json;charset=UTF-8',
+              JSESSIONID: authUser,
+            },
+          }
+        )
+        .then((res) => {
+          const { content, totalPages } = res.data;
+
+          setListTable(content);
+          setPage((prev) => ({
+            ...prev,
+            lastPage: totalPages,
+          }));
+        })
+        .catch((err) => console.error(err));
+    } catch (err) {
+      toast(err);
     }
   };
 
