@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ToastContainer } from "react-toastify";
+import Condition from "./components/condition/Condition";
+import Contents from "./components/contents/Contents";
+import LookupCounter from "./components/counter/LookupCounter";
+import PageTemplate from "./components/PageTemplate";
+import useAuth from "./hooks/useAuth";
+import useMain from "./hooks/useMain";
+import GlobalStyle from "./styles";
 
 function App() {
+  useAuth();
+  const { onSubmit, onKeyPress } = useMain();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+
+      <PageTemplate>
+        <Condition onSubmit={onSubmit} onKeyPress={onKeyPress} />
+        <LookupCounter />
+        <Contents />
+      </PageTemplate>
+
+      <ToastContainer position="bottom-center" draggable={false} />
+    </>
   );
 }
 
