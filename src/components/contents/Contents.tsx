@@ -123,7 +123,7 @@ const Contents: React.FC<Props> = () => {
                           {content.matchText}
                         </td>
                         <td style={{ width: '10%', wordBreak: 'break-all' }}>
-                          {content.matchText}
+                          {content.matchTextHan}
                         </td>
                         <td style={{ width: '5%', wordBreak: 'break-all' }}>
                           {content.resources}

@@ -40,6 +40,7 @@ interface TableType {
   application: string;
   category: string;
   matches: string;
+  matchTextHan: string;
   resource: string;
   group: string;
 }

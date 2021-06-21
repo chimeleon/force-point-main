@@ -177,6 +177,7 @@ export const ListTable = atom({
       applicationName: '', // application
       category: '', // category
       matchText: '', // matches
+      matchTextHan: '', // matchTextHan
       resources: '', // resource
       group: '', // group
     },
