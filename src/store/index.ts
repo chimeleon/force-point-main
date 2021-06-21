@@ -13,8 +13,8 @@ export const Menu = atom<string[]>({
 export const Page = atom<PageType>({
   key: 'Page',
   default: {
-    currentPage: 1,
-    lastPage: 1,
+    currentPage: 0,
+    lastPage: 0,
   },
 });
 

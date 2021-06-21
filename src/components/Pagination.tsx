@@ -27,12 +27,12 @@ const Pagination: React.FC<Props> = ({ page, lastPage, onPrev, onNext }) => {
   return (
     <Container>
       <PageButton
-        disabled={page === 1}
-        onClick={page === 1 ? undefined : onPrev}
+        disabled={page === 0}
+        onClick={page === 0 ? undefined : onPrev}
       >
         이전 페이지
       </PageButton>
-      <div className="now">{page} 페이지</div>
+      <div className="now">{page + 1} 페이지</div>
       <PageButton
         disabled={page === lastPage || lastPage === 0}
         onClick={page === lastPage ? undefined : onNext}

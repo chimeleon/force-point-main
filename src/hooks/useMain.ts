@@ -79,7 +79,7 @@ function useMain() {
 
       await axios
         .get(
-          `http://3.34.5.214:8080/evidences/9/list?page=${page.currentPage}&size=${counter.value}${
+          `/evidences/9/list?page=${page.currentPage}&size=${counter.value}${
             user.value !== '' ? `&user=${user.value}` : ''
           }${agent.value !== '' ? `&agent=${agent.value}` : ''}${
             person.value !== '' ? `&person=${person.value}` : ''
@@ -123,6 +123,7 @@ function useMain() {
         )
         .then((res) => {
           const { content, totalPages, totalElements } = res.data;
+          const { scrollTo } = window;
 
           setListTable(content);
           setPage((prev) => ({
@@ -130,8 +131,13 @@ function useMain() {
             lastPage: totalPages,
           }));
           setTotal(totalElements);
+          scrollTo(0, 0);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          localStorage.removeItem('jsessionId');
+          document.location.href = '/';
+        });
     } catch (err) {
       toast(err);
     }

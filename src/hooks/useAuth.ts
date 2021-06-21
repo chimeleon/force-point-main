@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { AuthUser } from '../store';
@@ -14,9 +15,20 @@ function useAuth() {
     setTime(0);
   }
 
-  const onLogout = () => {
-    localStorage.removeItem('jsessionId');
-    document.location.href = '/';
+  const onLogout = async () => {
+    try {
+      await axios.get('/logout', {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json;charset=UTF-8',
+          JSESSIONID: localStorage.getItem('jsessionId'),
+        },
+      });
+      localStorage.removeItem('jsessionId');
+      document.location.href = '/';
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
@@ -24,12 +36,12 @@ function useAuth() {
       setTime((prev) => prev + 1);
     }, 1000);
 
-    if (time > 60* 20) {
+    if (time > 60 * 20) {
       onLogout();
     }
-    
+
     return () => clearTimeout(tick);
-  },[time])
+  }, [time]);
 
   useEffect(() => {
     const token = localStorage.getItem('jsessionId');
@@ -39,7 +51,7 @@ function useAuth() {
     } else {
       setAuthUser(token);
     }
-  },[setAuthUser])
+  }, [setAuthUser]);
 
   useEffect(() => {
     window.addEventListener('beforeunload', LeaveOnPage);
