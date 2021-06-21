@@ -5,6 +5,7 @@ import CounterTemplate from "./components/CounterTemplate";
 import ExcelExport from "./components/ExcelExport";
 import Logout from "./components/Logout";
 import PageTemplate from "./components/PageTemplate";
+import Progressive from "./components/Progressive";
 import useAuth from "./hooks/useAuth";
 import useMain from "./hooks/useMain";
 import GlobalStyle from "./styles";
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <Progressive />
 
       <PageTemplate>
         <Logout onLogout={onLogout} />
