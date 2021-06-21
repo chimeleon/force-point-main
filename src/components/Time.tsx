@@ -6,8 +6,11 @@ import { useRecoilState } from 'recoil';
 import { EndTime, StartTime } from '../store';
 
 const Container = styled.div`
+  display: flex;
   margin-left: 0.5rem;
   label {
+    display: flex;
+    align-self: center;
     margin-left: 0.5rem;
     margin-right: 0.2rem;
   }
@@ -22,7 +25,8 @@ const Container = styled.div`
 `;
 
 const Space = styled.div`
-  display: inline;
+  display: flex;
+  align-self: center;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 `;

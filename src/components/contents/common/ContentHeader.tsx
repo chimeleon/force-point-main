@@ -5,13 +5,10 @@ import {
   Agent,
   AgentTime,
   Application,
-  Category,
   Matches,
   Person,
-  Policy,
   Time,
   User,
-  Group,
   Resource,
 } from '../../../store';
 import TableHeader from './TableHeader';
@@ -31,24 +28,18 @@ const ContentHeader: React.FC<Props> = () => {
   const [user, setUser] = useRecoilState(User);
   const [agent, setAgent] = useRecoilState(Agent);
   const [person, setPerson] = useRecoilState(Person);
-  const [policy, setPolicy] = useRecoilState(Policy);
   const [application, setApplication] = useRecoilState(Application);
-  const [category, setCategory] = useRecoilState(Category);
   const [matches, setMatches] = useRecoilState(Matches);
   const [resource, setResource] = useRecoilState(Resource);
-  const [group, setGroup] = useRecoilState(Group);
 
   const onToggleTime = () => {
     setAgentTime((prev) => ({ ...prev, sort: 'none' }));
     setUser((prev) => ({ ...prev, sort: 'none' }));
     setAgent((prev) => ({ ...prev, sort: 'none' }));
     setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
     setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
     setMatches((prev) => ({ ...prev, sort: 'none' }));
     setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
 
     setTime((prev) => ({
       ...prev,
@@ -62,12 +53,9 @@ const ContentHeader: React.FC<Props> = () => {
     setUser((prev) => ({ ...prev, sort: 'none' }));
     setAgent((prev) => ({ ...prev, sort: 'none' }));
     setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
     setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
     setMatches((prev) => ({ ...prev, sort: 'none' }));
     setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
 
     setAgentTime((prev) => ({
       ...prev,
@@ -81,12 +69,9 @@ const ContentHeader: React.FC<Props> = () => {
     setAgentTime((prev) => ({ ...prev, sort: 'none' }));
     setAgent((prev) => ({ ...prev, sort: 'none' }));
     setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
     setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
     setMatches((prev) => ({ ...prev, sort: 'none' }));
     setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
 
     setUser((prev) => ({
       ...prev,
@@ -100,12 +85,9 @@ const ContentHeader: React.FC<Props> = () => {
     setAgentTime((prev) => ({ ...prev, sort: 'none' }));
     setUser((prev) => ({ ...prev, sort: 'none' }));
     setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
     setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
     setMatches((prev) => ({ ...prev, sort: 'none' }));
     setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
 
     setAgent((prev) => ({
       ...prev,
@@ -119,33 +101,11 @@ const ContentHeader: React.FC<Props> = () => {
     setAgentTime((prev) => ({ ...prev, sort: 'none' }));
     setUser((prev) => ({ ...prev, sort: 'none' }));
     setAgent((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
     setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
     setMatches((prev) => ({ ...prev, sort: 'none' }));
     setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
 
     setPerson((prev) => ({
-      ...prev,
-      sort:
-        prev.sort === 'none' ? 'asc' : prev.sort === 'desc' ? 'none' : 'desc',
-    }));
-  };
-
-  const onTogglePolicy = () => {
-    setTime((prev) => ({ ...prev, sort: 'none' }));
-    setAgentTime((prev) => ({ ...prev, sort: 'none' }));
-    setUser((prev) => ({ ...prev, sort: 'none' }));
-    setAgent((prev) => ({ ...prev, sort: 'none' }));
-    setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
-    setMatches((prev) => ({ ...prev, sort: 'none' }));
-    setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
-
-    setPolicy((prev) => ({
       ...prev,
       sort:
         prev.sort === 'none' ? 'asc' : prev.sort === 'desc' ? 'none' : 'desc',
@@ -158,32 +118,10 @@ const ContentHeader: React.FC<Props> = () => {
     setUser((prev) => ({ ...prev, sort: 'none' }));
     setAgent((prev) => ({ ...prev, sort: 'none' }));
     setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
     setMatches((prev) => ({ ...prev, sort: 'none' }));
     setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
 
     setApplication((prev) => ({
-      ...prev,
-      sort:
-        prev.sort === 'none' ? 'asc' : prev.sort === 'desc' ? 'none' : 'desc',
-    }));
-  };
-
-  const onToggleCategory = () => {
-    setTime((prev) => ({ ...prev, sort: 'none' }));
-    setAgentTime((prev) => ({ ...prev, sort: 'none' }));
-    setUser((prev) => ({ ...prev, sort: 'none' }));
-    setAgent((prev) => ({ ...prev, sort: 'none' }));
-    setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
-    setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setMatches((prev) => ({ ...prev, sort: 'none' }));
-    setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
-
-    setCategory((prev) => ({
       ...prev,
       sort:
         prev.sort === 'none' ? 'asc' : prev.sort === 'desc' ? 'none' : 'desc',
@@ -196,11 +134,8 @@ const ContentHeader: React.FC<Props> = () => {
     setUser((prev) => ({ ...prev, sort: 'none' }));
     setAgent((prev) => ({ ...prev, sort: 'none' }));
     setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
     setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
     setResource((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
 
     setMatches((prev) => ({
       ...prev,
@@ -215,32 +150,10 @@ const ContentHeader: React.FC<Props> = () => {
     setUser((prev) => ({ ...prev, sort: 'none' }));
     setAgent((prev) => ({ ...prev, sort: 'none' }));
     setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
     setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
     setMatches((prev) => ({ ...prev, sort: 'none' }));
-    setGroup((prev) => ({ ...prev, sort: 'none' }));
 
     setResource((prev) => ({
-      ...prev,
-      sort:
-        prev.sort === 'none' ? 'asc' : prev.sort === 'desc' ? 'none' : 'desc',
-    }));
-  };
-
-  const onToggleGroup = () => {
-    setTime((prev) => ({ ...prev, sort: 'none' }));
-    setAgentTime((prev) => ({ ...prev, sort: 'none' }));
-    setUser((prev) => ({ ...prev, sort: 'none' }));
-    setAgent((prev) => ({ ...prev, sort: 'none' }));
-    setPerson((prev) => ({ ...prev, sort: 'none' }));
-    setPolicy((prev) => ({ ...prev, sort: 'none' }));
-    setApplication((prev) => ({ ...prev, sort: 'none' }));
-    setCategory((prev) => ({ ...prev, sort: 'none' }));
-    setMatches((prev) => ({ ...prev, sort: 'none' }));
-    setResource((prev) => ({ ...prev, sort: 'none' }));
-
-    setGroup((prev) => ({
       ...prev,
       sort:
         prev.sort === 'none' ? 'asc' : prev.sort === 'desc' ? 'none' : 'desc',
@@ -261,17 +174,13 @@ const ContentHeader: React.FC<Props> = () => {
         <th>Activity</th>
         <TableHeader name="Agent" model={agent} onToggle={onToggleAgent} />
         <TableHeader name="Person" model={person} onToggle={onTogglePerson} />
-        <TableHeader name="Policy" model={policy} onToggle={onTogglePolicy} />
+        <th>Policy</th>
         <TableHeader
           name="Application"
           model={application}
           onToggle={onToggleApplication}
         />
-        <TableHeader
-          name="Category"
-          model={category}
-          onToggle={onToggleCategory}
-        />
+        <th>Category</th>
         <TableHeader
           name="Matches"
           model={matches}
@@ -283,7 +192,7 @@ const ContentHeader: React.FC<Props> = () => {
           model={resource}
           onToggle={onToggleResource}
         />
-        <TableHeader name="Group" model={group} onToggle={onToggleGroup} />
+        <th>Group</th>
       </tr>
     </THead>
   );

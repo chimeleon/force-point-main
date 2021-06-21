@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SelectComponent from 'react-select';
+import makeAnimated from 'react-select/animated';
 import useTime from './hooks/useTime';
 import useAgentTime from './hooks/useAgentTime';
 import useUser from './hooks/useUser';
@@ -14,6 +15,7 @@ import useGroup from './hooks/useGroup';
 import { useRecoilState } from 'recoil';
 import { Menu } from '../../store';
 import useResource from './hooks/useResource';
+import { useMemo } from 'react';
 
 // Styles
 const Container = styled.div`
@@ -21,24 +23,31 @@ const Container = styled.div`
   .select {
     min-width: 140px;
   }
+  .css-1rhbuit-multiValue {
+    display: none!important;
+  }
 `;
 
-const options = [
-  { value: 'user', label: 'User' },
-  { value: 'time', label: 'Time' },
-  { value: 'agentTime', label: 'Agent Time' },
-  { value: 'agent', label: 'Agent' },
-  { value: 'person', label: 'Person' },
-  { value: 'policy', label: 'Policy' },
-  { value: 'application', label: 'Application' },
-  { value: 'category', label: 'Category' },
-  { value: 'matches', label: 'Matches' },
-  { value: 'group', label: 'Group' },
-];
+const animatedComponents = makeAnimated();
 
 interface Props {}
 
 const Select: React.FC<Props> = () => {
+  const options = useMemo(
+    () => [
+      { value: 'user', label: 'User' },
+      { value: 'time', label: 'Time' },
+      { value: 'agentTime', label: 'Agent Time' },
+      { value: 'agent', label: 'Agent' },
+      { value: 'person', label: 'Person' },
+      { value: 'policy', label: 'Policy' },
+      { value: 'application', label: 'Application' },
+      { value: 'category', label: 'Category' },
+      { value: 'matches', label: 'Matches' },
+      { value: 'group', label: 'Group' },
+    ],
+    []
+  ); 
   const { onToggleTime } = useTime();
   const { onToggleAgentTime } = useAgentTime();
   const { onToggleUser } = useUser();
@@ -54,6 +63,7 @@ const Select: React.FC<Props> = () => {
 
   const onChange = (e: any, { action }: { action: string }) => {
     let name = '';
+
     setMenu(
       Array.isArray(e)
         ? e.map((x) => {
@@ -63,10 +73,33 @@ const Select: React.FC<Props> = () => {
         : []
     );
 
-    if (action === 'clear') {
-      onClear();
+    switch (action) {
+      case 'clear':
+        return onClear();
+      case 'select-option':
+        return onInputChange(name);
+      case 'remove-value':
+        return onRemoveValue(name);
+      default:
+        return;
     }
+  };
 
+  const onClear = () => {
+    onToggleTime(true);
+    onToggleAgentTime(true);
+    onToggleUser(true);
+    onToggleAgent(true);
+    onTogglePerson(true);
+    onTogglePolicy(true);
+    onToggleApplication(true);
+    onToggleCategory(true);
+    onToggleMatches(true);
+    onToggleResource(true);
+    onToggleGroup(true);
+  };
+
+  const onInputChange = (name: string) => {
     switch (name) {
       case 'time':
         return onToggleTime();
@@ -93,32 +126,49 @@ const Select: React.FC<Props> = () => {
       default:
         return;
     }
-  };
+  }
 
-  const onClear = () => {
-    onToggleTime(true);
-    onToggleAgentTime(true);
-    onToggleUser(true);
-    onToggleAgent(true);
-    onTogglePerson(true);
-    onTogglePolicy(true);
-    onToggleApplication(true);
-    onToggleCategory(true);
-    onToggleMatches(true);
-    onToggleResource(true);
-    onToggleGroup(true);
-  };
+  const onRemoveValue = (name: string) => {
+    console.log(name)
+    switch (name) {
+      case 'time':
+        return onToggleTime(true);
+      case 'agentTime':
+        return onToggleAgentTime(true);
+      case 'user':
+        return onToggleUser(true);
+      case 'agent':
+        return onToggleAgent(true);
+      case 'person':
+        return onTogglePerson(true);
+      case 'policy':
+        return onTogglePolicy(true);
+      case 'application':
+        return onToggleApplication(true);
+      case 'category':
+        return onToggleCategory(true);
+      case 'matches':
+        return onToggleMatches(true);
+      case 'resource':
+        return onToggleResource(true);
+      case 'group':
+        return onToggleGroup(true);
+      default:
+        return;
+    }
+  }
 
   return (
     <Container>
       <SelectComponent
         className="select"
+        components={animatedComponents}
         value={options.filter((ob) => menu.includes(ob.value))}
         options={options}
         onChange={onChange}
         isMulti
-        hideSelectedOptions={true}
         placeholder="Search"
+        closeMenuOnSelect={true}
       />
     </Container>
   );

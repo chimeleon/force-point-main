@@ -5,6 +5,7 @@ import oc from 'open-color';
 // Styles
 const Container = styled.input`
   width: 80px;
+  max-height: 38px;
   margin-left: 0.5rem;
   border-radius: 4px;
   outline: none;

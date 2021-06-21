@@ -23,6 +23,7 @@ import {
   Page,
   ListTable,
   AuthUser,
+  Total,
 } from '../store';
 
 function useMain() {
@@ -45,6 +46,7 @@ function useMain() {
 
   const [page, setPage] = useRecoilState(Page);
   const [, setListTable] = useRecoilState(ListTable);
+  const [total, setTotal] = useRecoilState(Total);
   const authUser = useRecoilValue(AuthUser);
 
   const onPrevPage = () => {
@@ -77,7 +79,7 @@ function useMain() {
 
       await axios
         .get(
-          `/evidences/9/list?page=${page.currentPage}&size=${counter.value}${
+          `http://3.34.5.214:8080/evidences/9/list?page=${page.currentPage}&size=${counter.value}${
             user.value !== '' ? `&user=${user.value}` : ''
           }${agent.value !== '' ? `&agent=${agent.value}` : ''}${
             person.value !== '' ? `&person=${person.value}` : ''
@@ -120,13 +122,14 @@ function useMain() {
           }
         )
         .then((res) => {
-          const { content, totalPages } = res.data;
+          const { content, totalPages, totalElements } = res.data;
 
           setListTable(content);
           setPage((prev) => ({
             ...prev,
             lastPage: totalPages,
           }));
+          setTotal(totalElements);
         })
         .catch((err) => console.error(err));
     } catch (err) {
@@ -145,6 +148,7 @@ function useMain() {
     onPrevPage,
     onNextPage,
     onKeyPress,
+    total,
   };
 }
 

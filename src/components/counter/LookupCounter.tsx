@@ -7,7 +7,6 @@ import { Counter } from '../../store';
 // Styles
 const Container = styled.div`
   display: flex;
-  margin-bottom: 2rem;
   .counter {
     min-width: 100px;
   }

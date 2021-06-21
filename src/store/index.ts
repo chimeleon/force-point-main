@@ -183,3 +183,8 @@ export const ListTable = atom({
     },
   ],
 });
+
+export const Total = atom<number>({
+  key: 'Total',
+  default: 0,
+});

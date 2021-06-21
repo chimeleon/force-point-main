@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Input from '../Input';
 import Select from './Select';
@@ -17,6 +17,7 @@ import useMatches from './hooks/useMatches';
 import useGroup from './hooks/useGroup';
 import Time from '../Time';
 import AgentTime from '../AgentTime';
+import useResource from './hooks/useResource';
 
 // Styles
 const Container = styled.div`
@@ -30,7 +31,7 @@ interface Props {
 }
 
 const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
-  const menu = useRecoilValue(Menu);
+  const [menu, setMenu] = useRecoilState(Menu);
   const { time } = useTime();
   const { agentTime } = useAgentTime();
   const { user, onChangeUser } = useUser();
@@ -41,6 +42,33 @@ const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
   const { category, onChangeCategory } = useCategory();
   const { matches, onChangeMatches } = useMatches();
   const { group, onChangeGroup } = useGroup();
+
+  const { onToggleTime } = useTime();
+  const { onToggleAgentTime } = useAgentTime();
+  const { onToggleUser } = useUser();
+  const { onToggleAgent } = useAgent();
+  const { onTogglePerson } = usePerson();
+  const { onTogglePolicy } = usePolicy();
+  const { onToggleApplication } = useApplication();
+  const { onToggleCategory } = useCategory();
+  const { onToggleMatches } = useMatches();
+  const { onToggleResource } = useResource();
+  const { onToggleGroup } = useGroup();
+
+  const onClear = () => {
+    setMenu([]);
+    onToggleTime(true);
+    onToggleAgentTime(true);
+    onToggleUser(true);
+    onToggleAgent(true);
+    onTogglePerson(true);
+    onTogglePolicy(true);
+    onToggleApplication(true);
+    onToggleCategory(true);
+    onToggleMatches(true);
+    onToggleResource(true);
+    onToggleGroup(true);
+  };
 
   return (
     <Container>
@@ -112,7 +140,14 @@ const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
         />
       )}
 
-      {menu.length > 0 && <Button onClick={onSubmit}>조 회</Button>}
+      {menu.length > 0 && (
+        <>
+          <Button cyan onClick={onSubmit}>
+            조 회
+          </Button>
+          <Button onClick={onClear}>초기화</Button>
+        </>
+      )}
     </Container>
   );
 };

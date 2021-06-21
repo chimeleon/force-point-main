@@ -87,10 +87,10 @@ const Contents: React.FC<Props> = () => {
               <>
                 {contents[0].evidenceId !== '' ? (
                   <>
-                    {contents.map(content => (
+                    {contents.map((content) => (
                       <tr key={content.evidenceId}>
                         <td style={{ width: '5%', wordBreak: 'break-all' }}>
-                          {content.channel}
+                          Keyboard
                         </td>
                         <td style={{ width: '6%', wordBreak: 'break-all' }}>
                           {content.evidenceStartTime}

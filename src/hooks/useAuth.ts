@@ -9,11 +9,16 @@ function useAuth() {
     localStorage.removeItem('jsessionId');
   }
 
+  const onLogout = () => {
+    localStorage.removeItem('jsessionId');
+    document.location.href = '/';
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('jsessionId');
 
     if (!token) {
-      document.location.href = '/customLogin';
+      // document.location.href = '/customLogin';
     } else {
       setAuthUser(token);
     }
@@ -26,6 +31,10 @@ function useAuth() {
       window.removeEventListener('beforeunload', handle);
     };
   }, []);
+
+  return {
+    onLogout,
+  };
 }
 
 export default useAuth;
