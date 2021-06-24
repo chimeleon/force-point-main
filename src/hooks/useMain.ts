@@ -60,16 +60,16 @@ function useMain() {
   const onSubmit = async () => {
     try {
       const sortArray = [
-        { name: 'time', sort: time.sort },
+        { name: 'EVIDENCESTARTTIME', sort: time.sort },
         { name: 'agentTime', sort: agentTime.sort },
         { name: 'userDim.label', sort: user.sort },
-        { name: 'agent', sort: agent.sort },
+        { name: 'agentDim.label', sort: agent.sort },
         { name: 'userDim.targetUser.label', sort: person.sort },
         { name: 'policy', sort: policy.sort },
-        { name: 'application', sort: application.sort },
+        { name: 'applicationName', sort: application.sort },
         { name: 'category', sort: category.sort },
-        { name: 'matches', sort: matches.sort },
-        { name: 'resource', sort: resource.sort },
+        { name: 'matchetext', sort: matches.sort },
+        { name: 'resources', sort: resource.sort },
         { name: 'group', sort: group.sort },
       ];
 

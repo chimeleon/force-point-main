@@ -99,10 +99,10 @@ const Contents: React.FC<Props> = () => {
                           {new Date(content.agentTime).toISOString()}
                         </td>
                         <td style={{ width: '7%', wordBreak: 'break-all' }}>
-                          {content.eventType.label}
+                          {content.userDim.label}
                         </td>
                         <td style={{ width: '8%', wordBreak: 'break-all' }}>
-                          {content.userDim.label}
+                          {content.eventType.label}
                         </td>
                         <td style={{ width: '8%', wordBreak: 'break-all' }}>
                           {content.agentDim.label}
