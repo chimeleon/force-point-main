@@ -9,11 +9,11 @@ function useAuth() {
 
   const LeaveOnPage = () => {
     localStorage.removeItem('jsessionId');
-  }
+  };
 
   const onTimeReset = () => {
     setTime(0);
-  }
+  };
 
   const onLogout = async () => {
     try {
@@ -29,7 +29,7 @@ function useAuth() {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     const tick = setTimeout(() => {
@@ -56,7 +56,7 @@ function useAuth() {
   useEffect(() => {
     window.addEventListener('beforeunload', LeaveOnPage);
     window.addEventListener('mousemove', onTimeReset);
-    window.addEventListener('mousedown', onTimeReset)
+    window.addEventListener('mousedown', onTimeReset);
     window.addEventListener('keypress', onTimeReset);
 
     return () => {

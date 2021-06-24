@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 import { useRecoilState } from 'recoil';
-import { Counter } from '../../store';
+import { Counter, Page } from '../../store';
 
 // Styles
 const Container = styled.div`
@@ -22,9 +22,14 @@ const options = [
 
 const LookupCounter: React.FC<Props> = () => {
   const [counter, setCounter] = useRecoilState(Counter);
+  const [, setPage] = useRecoilState(Page);
 
   const onChange = (e: any) => {
     setCounter({ value: e.value, label: e.label });
+    setPage((prev) => ({
+      ...prev,
+      currentPage: 0,
+    }));
   };
 
   return (
