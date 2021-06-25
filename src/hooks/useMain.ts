@@ -68,7 +68,7 @@ function useMain() {
         { name: 'policy', sort: policy.sort },
         { name: 'applicationName', sort: application.sort },
         { name: 'category', sort: category.sort },
-        { name: 'matchetext', sort: matches.sort },
+        { name: 'matchtext', sort: matches.sort },
         { name: 'resources', sort: resource.sort },
         { name: 'group', sort: group.sort },
       ];
