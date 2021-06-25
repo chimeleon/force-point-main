@@ -1,14 +1,15 @@
-import { ToastContainer } from "react-toastify";
-import Condition from "./components/condition/Condition";
-import Contents from "./components/contents/Contents";
-import CounterTemplate from "./components/CounterTemplate";
-import ExcelExport from "./components/ExcelExport";
-import Logout from "./components/Logout";
-import PageTemplate from "./components/PageTemplate";
-import Progressive from "./components/Progressive";
-import useAuth from "./hooks/useAuth";
-import useMain from "./hooks/useMain";
-import GlobalStyle from "./styles";
+import { ToastContainer } from 'react-toastify';
+import Condition from './components/condition/Condition';
+import Contents from './components/contents/Contents';
+import CounterTemplate from './components/CounterTemplate';
+import ExcelExport from './components/ExcelExport';
+import Logout from './components/Logout';
+import PageTemplate from './components/PageTemplate';
+import Progressive from './components/Progressive';
+import useAuth from './hooks/useAuth';
+import useMain from './hooks/useMain';
+import GlobalStyle from './styles';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
   const { onLogout } = useAuth();
