@@ -13,7 +13,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
   const { onLogout } = useAuth();
-  const { onSubmit, onKeyPress, total } = useMain();
+  const { onSubmit, onKeyPress, total, onExcel } = useMain();
 
   return (
     <>
@@ -23,7 +23,7 @@ function App() {
       <PageTemplate>
         <Logout onLogout={onLogout} />
         <Condition onSubmit={onSubmit} onKeyPress={onKeyPress} />
-        <ExcelExport />
+        <ExcelExport onExcel={onExcel} />
         <CounterTemplate total={total} />
         <Contents />
       </PageTemplate>

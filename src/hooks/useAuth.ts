@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import cookie from 'js-cookie';
 import { AuthUser } from '../store';
 
 function useAuth() {
@@ -8,7 +9,7 @@ function useAuth() {
   const [time, setTime] = useState(0);
 
   const LeaveOnPage = () => {
-    localStorage.removeItem('jsessionId');
+    onLogout();
   };
 
   const onTimeReset = () => {
@@ -21,10 +22,9 @@ function useAuth() {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json;charset=UTF-8',
-          JSESSIONID: localStorage.getItem('jsessionId'),
+          JSESSIONID: cookie.get('JSESSIONID'),
         },
       });
-      localStorage.removeItem('jsessionId');
       document.location.href = '/';
     } catch (err) {
       console.log(err);
@@ -44,10 +44,12 @@ function useAuth() {
   }, [time]);
 
   useEffect(() => {
-    const token = localStorage.getItem('jsessionId');
+    const token = cookie.get('JSESSIONID');
+
+    console.log(token);
 
     if (!token) {
-      document.location.href = '/customLogin';
+      // document.location.href = '/customLogin';
     } else {
       setAuthUser(token);
     }

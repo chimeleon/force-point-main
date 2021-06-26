@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: sans-serif;
     box-sizing: border-box;
+    font-size: 0.8rem;
   }
   *, *:before, *:after {
     box-sizing: inherit;

@@ -9,12 +9,16 @@ const Container = styled.div`
   height: 36px;
 `;
 
-interface Props {}
+interface Props {
+  onExcel: () => void;
+}
 
-const ExcelExport: React.FC<Props> = () => {
+const ExcelExport: React.FC<Props> = ({ onExcel }) => {
   return (
     <Container>
-      <Button green={true}>ExcelExport</Button>
+      <Button green={true} onClick={onExcel}>
+        ExcelExport
+      </Button>
     </Container>
   );
 };

@@ -10,6 +10,7 @@ import {
   AgentTime,
   Application,
   Category,
+  Counter,
   Group,
   Matches,
   Page,
@@ -25,11 +26,12 @@ import Skeleton from './common/Skeleton';
 // Styles
 const Container = styled.div`
   display: flex;
-  width: 100%;
   justify-content: flex-start;
+  width: 150vw;
+  
   table {
     border-spacing: 0 0;
-    overflow: hidden;
+    overflow: scroll;
   }
   th,
   td {
@@ -59,11 +61,13 @@ const Contents: React.FC<Props> = () => {
   const matches = useRecoilValue(Matches);
   const resource = useRecoilValue(Resource);
   const group = useRecoilValue(Group);
+  const count = useRecoilValue(Counter);
 
   useEffect(() => {
     onSubmit();
   }, [
     page.currentPage,
+    count.value,
     time.sort,
     agentTime.sort,
     user.sort,
@@ -89,46 +93,44 @@ const Contents: React.FC<Props> = () => {
                   <>
                     {contents.map((content) => (
                       <tr key={content.evidenceId}>
-                        <td style={{ width: '5%', wordBreak: 'break-all' }}>
-                          Keyboard
-                        </td>
-                        <td style={{ width: '6%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>Keyboard</td>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.evidenceStartTime}
                         </td>
-                        <td style={{ width: '6%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {new Date(content.agentTime).toISOString()}
                         </td>
-                        <td style={{ width: '7%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.userDim.label}
                         </td>
-                        <td style={{ width: '8%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.eventType.label}
                         </td>
-                        <td style={{ width: '8%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.agentDim.label}
                         </td>
-                        <td style={{ width: '10%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.userDim.targetUser.samAccountName}
                         </td>
-                        <td style={{ width: '6%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.policy}
                         </td>
-                        <td style={{ width: '8%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.applicationName}
                         </td>
-                        <td style={{ width: '8%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.category}
                         </td>
-                        <td style={{ width: '8%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.matchText}
                         </td>
-                        <td style={{ width: '10%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.matchTextHan}
                         </td>
-                        <td style={{ width: '5%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.resources}
                         </td>
-                        <td style={{ width: '5%', wordBreak: 'break-all' }}>
+                        <td style={{ wordBreak: 'break-all' }}>
                           {content.group}
                         </td>
                       </tr>

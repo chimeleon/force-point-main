@@ -79,7 +79,9 @@ function useMain() {
 
       await axios
         .get(
-          `/evidences/9/list?page=${page.currentPage}&size=${counter.value}${
+          `http://3.34.5.214:8080/evidences/9/list?page=${
+            page.currentPage
+          }&size=${counter.value}${
             user.value !== '' ? `&user=${user.value}` : ''
           }${agent.value !== '' ? `&agent=${agent.value}` : ''}${
             person.value !== '' ? `&person=${person.value}` : ''
@@ -135,13 +137,95 @@ function useMain() {
         })
         .catch((err) => {
           console.error(err);
-          localStorage.removeItem('jsessionId');
+          
           document.location.href = '/';
         });
     } catch (err) {
       toast(err);
     }
   };
+
+  const onExcel = async () => {
+    try {
+      const sortArray = [
+        { name: 'EVIDENCESTARTTIME', sort: time.sort },
+        { name: 'agentTime', sort: agentTime.sort },
+        { name: 'userDim.label', sort: user.sort },
+        { name: 'agentDim.label', sort: agent.sort },
+        { name: 'userDim.targetUser.label', sort: person.sort },
+        { name: 'policy', sort: policy.sort },
+        { name: 'applicationName', sort: application.sort },
+        { name: 'category', sort: category.sort },
+        { name: 'matchtext', sort: matches.sort },
+        { name: 'resources', sort: resource.sort },
+        { name: 'group', sort: group.sort },
+      ];
+
+      const sortData = sortArray.filter((data) => {
+        return data.sort !== 'none';
+      });
+
+      await axios
+        .get(
+          `http://3.34.5.214:8080/evidences/9/excel?page=${
+            page.currentPage
+          }&size=${counter.value}${
+            user.value !== '' ? `&user=${user.value}` : ''
+          }${agent.value !== '' ? `&agent=${agent.value}` : ''}${
+            person.value !== '' ? `&person=${person.value}` : ''
+          }${policy.value !== '' ? `&policy=${policy.value}` : ''}${
+            application.value !== '' ? `&application=${application.value}` : ''
+          }${category.value !== '' ? `&category=${category.value}` : ''}${
+            matches.value !== '' ? `&matches=${matches.value}` : ''
+          }${resource.value !== '' ? `&resources=${resource.value}` : ''}${
+            group.value !== '' ? `&group=${group.value}` : ''
+          }${
+            sortData[0] ? `&sort=${sortData[0].name},${sortData[0].sort}` : ''
+          }${
+            time.visible
+              ? `&startTime=${moment(startTime.date).format('YYYY-MM-DD')}`
+              : ''
+          }${
+            time.visible
+              ? `&endTime=${moment(endTime.date).format('YYYY-MM-DD')}`
+              : ''
+          }${
+            agentTime.visible
+              ? `&startAgentTime=${moment(startAgentTime.date).format(
+                  'YYYY-MM-DD'
+                )}`
+              : ''
+          }${
+            agentTime.visible
+              ? `&endAgentTime=${moment(endAgentTime.date).format(
+                  'YYYY-MM-DD'
+                )}`
+              : ''
+          }
+            `,
+          {
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json;charset=UTF-8',
+              responseType: 'blob',
+              JSESSIONID: authUser,
+            },
+          }
+        )
+        .then((res) => {
+          const url = window.URL.createObjectURL(new Blob([res.data]));
+          const link = document.createElement('a');
+          
+          link.href = url;
+          link.setAttribute('download', 'excel.csv');
+          document.body.appendChild(link);
+          link.click();
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      toast.error(err);
+    }
+  }
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -155,6 +239,7 @@ function useMain() {
     onNextPage,
     onKeyPress,
     total,
+    onExcel,
   };
 }
 
