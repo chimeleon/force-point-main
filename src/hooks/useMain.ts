@@ -124,6 +124,7 @@ function useMain() {
           }
         )
         .then((res) => {
+          console.log(res.status);
           const { content, totalPages, totalElements } = res.data;
           const { scrollTo } = window;
 
@@ -138,7 +139,7 @@ function useMain() {
         .catch((err) => {
           console.error(err);
           
-          document.location.href = '/';
+          document.location.href = '/customLogin';
         });
     } catch (err) {
       toast(err);
@@ -215,7 +216,7 @@ function useMain() {
         .then((res) => {
           const url = window.URL.createObjectURL(new Blob([res.data]));
           const link = document.createElement('a');
-          
+
           link.href = url;
           link.setAttribute('download', 'excel.csv');
           document.body.appendChild(link);
