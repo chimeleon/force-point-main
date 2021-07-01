@@ -68,6 +68,7 @@ const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
     onToggleMatches(true);
     onToggleResource(true);
     onToggleGroup(true);
+    onSubmit();
   };
 
   return (
@@ -140,11 +141,12 @@ const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
         />
       )}
 
+      <Button cyan onClick={onSubmit}>
+        조 회
+      </Button>
+
       {menu.length > 0 && (
         <>
-          <Button cyan onClick={onSubmit}>
-            조 회
-          </Button>
           <Button onClick={onClear}>초기화</Button>
         </>
       )}

@@ -26,6 +26,8 @@ import {
   Total,
 } from '../store';
 
+const apiServer = '';
+
 function useMain() {
   const time = useRecoilValue(Time);
   const agentTime = useRecoilValue(AgentTime);
@@ -79,13 +81,13 @@ function useMain() {
 
       await axios
         .get(
-          `http://3.34.5.214:8080/evidences/9/list?page=${
-            page.currentPage
-          }&size=${counter.value}${
-            user.value !== '' ? `&user=${user.value}` : ''
-          }${agent.value !== '' ? `&agent=${agent.value}` : ''}${
-            person.value !== '' ? `&person=${person.value}` : ''
-          }${policy.value !== '' ? `&policy=${policy.value}` : ''}${
+          `${apiServer}/evidences/9/list?page=${page.currentPage}&size=${
+            counter.value
+          }${user.value !== '' ? `&user=${user.value}` : ''}${
+            agent.value !== '' ? `&agent=${agent.value}` : ''
+          }${person.value !== '' ? `&person=${person.value}` : ''}${
+            policy.value !== '' ? `&policy=${policy.value}` : ''
+          }${
             application.value !== '' ? `&application=${application.value}` : ''
           }${category.value !== '' ? `&category=${category.value}` : ''}${
             matches.value !== '' ? `&matches=${matches.value}` : ''
@@ -138,7 +140,7 @@ function useMain() {
         })
         .catch((err) => {
           console.error(err);
-          
+
           document.location.href = '/customLogin';
         });
     } catch (err) {
@@ -168,13 +170,13 @@ function useMain() {
 
       await axios
         .get(
-          `http://3.34.5.214:8080/evidences/9/excel?page=${
-            page.currentPage
-          }&size=${counter.value}${
-            user.value !== '' ? `&user=${user.value}` : ''
-          }${agent.value !== '' ? `&agent=${agent.value}` : ''}${
-            person.value !== '' ? `&person=${person.value}` : ''
-          }${policy.value !== '' ? `&policy=${policy.value}` : ''}${
+          `${apiServer}/evidences/9/excel?page=${page.currentPage}&size=${
+            counter.value
+          }${user.value !== '' ? `&user=${user.value}` : ''}${
+            agent.value !== '' ? `&agent=${agent.value}` : ''
+          }${person.value !== '' ? `&person=${person.value}` : ''}${
+            policy.value !== '' ? `&policy=${policy.value}` : ''
+          }${
             application.value !== '' ? `&application=${application.value}` : ''
           }${category.value !== '' ? `&category=${category.value}` : ''}${
             matches.value !== '' ? `&matches=${matches.value}` : ''
@@ -226,7 +228,7 @@ function useMain() {
     } catch (err) {
       toast.error(err);
     }
-  }
+  };
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { IoIosArrowDropup, IoIosArrowDropdown } from 'react-icons/io';
+import { FaSort } from 'react-icons/fa';
 
 // Styles
 const Th = styled.th`
@@ -29,7 +30,11 @@ const TableHeader: React.FC<Props> = ({ name, model, onToggle }) => {
   return (
     <Th onClick={onToggle}>
       {name}{' '}
-      {model.sort !== 'none' && (
+      {model.sort === 'none' ? (
+        <>
+          <FaSort />
+        </>
+      ) : (
         <>
           {model.sort === 'asc' ? <IoIosArrowDropup /> : <IoIosArrowDropdown />}
         </>
