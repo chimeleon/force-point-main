@@ -208,9 +208,8 @@ function useMain() {
             `,
           {
             headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json;charset=UTF-8',
-              responseType: 'blob',
+              Accept:
+                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
               JSESSIONID: authUser,
             },
           }
