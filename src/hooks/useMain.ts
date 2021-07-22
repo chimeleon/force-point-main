@@ -210,18 +210,32 @@ function useMain() {
             headers: {
               Accept:
                 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+              responseType: 'blob',
               JSESSIONID: authUser,
             },
           }
         )
         .then((res) => {
-          const url = window.URL.createObjectURL(new Blob([res.data]));
+          const url = res.data;
           const link = document.createElement('a');
 
           link.href = url;
           link.setAttribute('download', 'excel.csv');
           document.body.appendChild(link);
           link.click();
+
+          /*
+            엑셀 예제
+            responseType: 'blob'
+
+            const url = window.URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] }));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'test.xlsx');
+            document.body.appendChild(link);
+            link.click();
+            window.URL.revokeObjectURL(link);
+          */
         })
         .catch((err) => console.log(err));
     } catch (err) {
