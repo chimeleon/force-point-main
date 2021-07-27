@@ -93,6 +93,9 @@ const Contents: React.FC<Props> = () => {
                   <>
                     {contents.map((content) => (
                       <tr key={content.evidenceId}>
+                        <td style={{ wordBreak: 'break-all' }}>
+                          {content.eventType.evidencetype}
+                        </td>
                         <td style={{ wordBreak: 'break-all' }}>Keyboard</td>
                         <td style={{ wordBreak: 'break-all' }}>
                           {content.evidenceStartTime}

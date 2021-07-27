@@ -163,6 +163,7 @@ const ContentHeader: React.FC<Props> = () => {
   return (
     <THead>
       <tr>
+        <th>EvidenceType</th>
         <th>Channel</th>
         <TableHeader name="Time" model={time} onToggle={onToggleTime} />
         <TableHeader
