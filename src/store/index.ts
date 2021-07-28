@@ -168,7 +168,7 @@ export const ListTable = atom({
         },
       },
       eventType: {
-        evidencetype: '', // evidenceType
+        evidenceType: '', // evidenceType
         label: '', // activity
       },
       agentDim: {

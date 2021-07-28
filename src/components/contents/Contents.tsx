@@ -28,7 +28,7 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 150vw;
-  
+
   table {
     border-spacing: 0 0;
     overflow: scroll;
@@ -94,7 +94,7 @@ const Contents: React.FC<Props> = () => {
                     {contents.map((content) => (
                       <tr key={content.evidenceId}>
                         <td style={{ wordBreak: 'break-all' }}>
-                          {content.eventType.evidencetype}
+                          {content.eventType.evidenceType}
                         </td>
                         <td style={{ wordBreak: 'break-all' }}>Keyboard</td>
                         <td style={{ wordBreak: 'break-all' }}>
