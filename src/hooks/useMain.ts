@@ -27,6 +27,7 @@ import {
   EvidenceType,
 } from '../store';
 
+// http://3.34.5.214:8080
 const apiServer = '';
 
 function useMain() {

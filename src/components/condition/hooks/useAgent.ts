@@ -19,6 +19,7 @@ function useAgent() {
     agent,
     onToggleAgent,
     onChangeAgent,
+    setAgent
   };
 }
 

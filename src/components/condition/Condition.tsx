@@ -16,8 +16,7 @@ import useMatches from './hooks/useMatches';
 import useGroup from './hooks/useGroup';
 import TimeCompo from '../Time';
 import AgentTimeCompo from '../AgentTime';
-import useResource from './hooks/useResource';
-import { Agent, AgentTime, Application, Category, EndAgentTime, EndTime, EvidenceType, Group, Matches, Menu, Page, Person, Policy, Resource, StartAgentTime, StartTime, Time, User } from '../../store';
+import { Menu } from '../../store';
 
 // Styles
 const Container = styled.div`
@@ -31,8 +30,7 @@ interface Props {
 }
 
 const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
-  const [menu, setMenu] = useRecoilState(Menu);
-  const [, setPage] = useRecoilState(Page);
+  const [menu] = useRecoilState(Menu);
   const { agentTime } = useAgentTime();
   const { user, onChangeUser } = useUser();
   const { agent, onChangeAgent } = useAgent();
@@ -44,71 +42,8 @@ const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
   const { group, onChangeGroup } = useGroup();
   const { time } = useTime();
 
-  const { onToggleTime } = useTime();
-  const { onToggleAgentTime } = useAgentTime();
-  const { onToggleUser } = useUser();
-  const { onToggleAgent } = useAgent();
-  const { onTogglePerson } = usePerson();
-  const { onTogglePolicy } = usePolicy();
-  const { onToggleApplication } = useApplication();
-  const { onToggleCategory } = useCategory();
-  const { onToggleMatches } = useMatches();
-  const { onToggleResource } = useResource();
-  const { onToggleGroup } = useGroup();
-
-  const [, setEvidenceType] = useRecoilState(EvidenceType);
-  const [, setStartTime] = useRecoilState(StartTime);
-  const [, setEndTime] = useRecoilState(EndTime);
-  const [, setStartAgentTime] = useRecoilState(StartAgentTime);
-  const [, setEndAgentTime] = useRecoilState(EndAgentTime);
-  const [, setTime] = useRecoilState(Time);
-  const [, setAgentTime] = useRecoilState(AgentTime);
-  const [, setUser] = useRecoilState(User);
-  const [, setAgent] = useRecoilState(Agent);
-  const [, setPerson] = useRecoilState(Person);
-  const [, setPolicy] = useRecoilState(Policy);
-  const [, setApplication] = useRecoilState(Application);
-  const [, setCategory] = useRecoilState(Category);
-  const [, setMatches] = useRecoilState(Matches);
-  const [, setResource] = useRecoilState(Resource);
-  const [, setGroup] = useRecoilState(Group);
-
-  const onClear = async () => {
-    setMenu([]);
-    setPage((prev) => ({
-      ...prev,
-      currentPage: 0,
-    }));
-    onToggleTime(true);
-    onToggleAgentTime(true);
-    onToggleUser(true);
-    onToggleAgent(true);
-    onTogglePerson(true);
-    onTogglePolicy(true);
-    onToggleApplication(true);
-    onToggleCategory(true);
-    onToggleMatches(true);
-    onToggleResource(true);
-    onToggleGroup(true);
-
-    setEvidenceType((prev) => ({ ...prev, value: '' }));
-    setStartTime((prev) => ({ ...prev, value: '' }));
-    setEndTime((prev) => ({ ...prev, value: '' }));
-    setStartAgentTime((prev) => ({ ...prev, value: '' }));
-    setEndAgentTime((prev) => ({ ...prev, value: '' }));
-    setTime((prev) => ({ ...prev, value: '' }));
-    setAgentTime((prev) => ({ ...prev, value: '' }));
-    setUser((prev) => ({ ...prev, value: '' }));
-    setAgent((prev) => ({ ...prev, value: '' }));
-    setPerson((prev) => ({ ...prev, value: '' }));
-    setPolicy((prev) => ({ ...prev, value: '' }));
-    setApplication((prev) => ({ ...prev, value: '' }));
-    setCategory((prev) => ({ ...prev, value: '' }));
-    setMatches((prev) => ({ ...prev, value: '' }));
-    setResource((prev) => ({ ...prev, value: '' }));
-    setGroup((prev) => ({ ...prev, value: '' }));
-
-    await onSubmit();
+  const onClear = () => {
+    window.location.replace('/');
   };
 
   return (
