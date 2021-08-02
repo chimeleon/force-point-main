@@ -45,7 +45,7 @@ function useAuth() {
     console.log(token);
 
     if (!token) {
-      // document.location.href = '/customLogin';
+      document.location.href = '/customLogin';
     } else {
       setAuthUser(token);
     }

@@ -154,6 +154,7 @@ const Contents: React.FC<Props> = () => {
                     <Skeleton />
                     <Skeleton />
                     <Skeleton />
+                    <Skeleton />
                   </>
                 )}
               </>
@@ -161,7 +162,7 @@ const Contents: React.FC<Props> = () => {
               <tr>
                 <td
                   style={{ width: '100vw', textAlign: 'center' }}
-                  colSpan={14}
+                  colSpan={15}
                 >
                   데이터가 없습니다.
                 </td>

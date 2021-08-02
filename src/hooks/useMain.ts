@@ -27,7 +27,7 @@ import {
   EvidenceType,
 } from '../store';
 
-const apiServer = 'http://3.34.5.214:8080';
+const apiServer = '';
 
 function useMain() {
   const time = useRecoilValue(Time);

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Input from '../Input';
 import Select from './Select';
 import Button from '../Button';
-import { Menu } from '../../store';
 import useTime from './hooks/useTime';
 import useAgentTime from './hooks/useAgentTime';
 import useUser from './hooks/useUser';
@@ -15,9 +14,10 @@ import useApplication from './hooks/useApplication';
 import useCategory from './hooks/useCategory';
 import useMatches from './hooks/useMatches';
 import useGroup from './hooks/useGroup';
-import Time from '../Time';
-import AgentTime from '../AgentTime';
+import TimeCompo from '../Time';
+import AgentTimeCompo from '../AgentTime';
 import useResource from './hooks/useResource';
+import { Agent, AgentTime, Application, Category, EndAgentTime, EndTime, EvidenceType, Group, Matches, Menu, Page, Person, Policy, Resource, StartAgentTime, StartTime, Time, User } from '../../store';
 
 // Styles
 const Container = styled.div`
@@ -32,7 +32,7 @@ interface Props {
 
 const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
   const [menu, setMenu] = useRecoilState(Menu);
-  const { time } = useTime();
+  const [, setPage] = useRecoilState(Page);
   const { agentTime } = useAgentTime();
   const { user, onChangeUser } = useUser();
   const { agent, onChangeAgent } = useAgent();
@@ -42,6 +42,7 @@ const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
   const { category, onChangeCategory } = useCategory();
   const { matches, onChangeMatches } = useMatches();
   const { group, onChangeGroup } = useGroup();
+  const { time } = useTime();
 
   const { onToggleTime } = useTime();
   const { onToggleAgentTime } = useAgentTime();
@@ -55,8 +56,29 @@ const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
   const { onToggleResource } = useResource();
   const { onToggleGroup } = useGroup();
 
-  const onClear = () => {
+  const [, setEvidenceType] = useRecoilState(EvidenceType);
+  const [, setStartTime] = useRecoilState(StartTime);
+  const [, setEndTime] = useRecoilState(EndTime);
+  const [, setStartAgentTime] = useRecoilState(StartAgentTime);
+  const [, setEndAgentTime] = useRecoilState(EndAgentTime);
+  const [, setTime] = useRecoilState(Time);
+  const [, setAgentTime] = useRecoilState(AgentTime);
+  const [, setUser] = useRecoilState(User);
+  const [, setAgent] = useRecoilState(Agent);
+  const [, setPerson] = useRecoilState(Person);
+  const [, setPolicy] = useRecoilState(Policy);
+  const [, setApplication] = useRecoilState(Application);
+  const [, setCategory] = useRecoilState(Category);
+  const [, setMatches] = useRecoilState(Matches);
+  const [, setResource] = useRecoilState(Resource);
+  const [, setGroup] = useRecoilState(Group);
+
+  const onClear = async () => {
     setMenu([]);
+    setPage((prev) => ({
+      ...prev,
+      currentPage: 0,
+    }));
     onToggleTime(true);
     onToggleAgentTime(true);
     onToggleUser(true);
@@ -68,14 +90,32 @@ const Condition: React.FC<Props> = ({ onSubmit, onKeyPress }) => {
     onToggleMatches(true);
     onToggleResource(true);
     onToggleGroup(true);
-    onSubmit();
+
+    setEvidenceType((prev) => ({ ...prev, value: '' }));
+    setStartTime((prev) => ({ ...prev, value: '' }));
+    setEndTime((prev) => ({ ...prev, value: '' }));
+    setStartAgentTime((prev) => ({ ...prev, value: '' }));
+    setEndAgentTime((prev) => ({ ...prev, value: '' }));
+    setTime((prev) => ({ ...prev, value: '' }));
+    setAgentTime((prev) => ({ ...prev, value: '' }));
+    setUser((prev) => ({ ...prev, value: '' }));
+    setAgent((prev) => ({ ...prev, value: '' }));
+    setPerson((prev) => ({ ...prev, value: '' }));
+    setPolicy((prev) => ({ ...prev, value: '' }));
+    setApplication((prev) => ({ ...prev, value: '' }));
+    setCategory((prev) => ({ ...prev, value: '' }));
+    setMatches((prev) => ({ ...prev, value: '' }));
+    setResource((prev) => ({ ...prev, value: '' }));
+    setGroup((prev) => ({ ...prev, value: '' }));
+
+    await onSubmit();
   };
 
   return (
     <Container>
       <Select />
-      {time.visible && <Time />}
-      {agentTime.visible && <AgentTime />}
+      {time.visible && <TimeCompo />}
+      {agentTime.visible && <AgentTimeCompo />}
       {user.visible && (
         <Input
           name="user"
