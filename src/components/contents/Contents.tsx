@@ -11,6 +11,7 @@ import {
   Application,
   Category,
   Counter,
+  EvidenceType,
   Group,
   Matches,
   Page,
@@ -62,6 +63,7 @@ const Contents: React.FC<Props> = () => {
   const resource = useRecoilValue(Resource);
   const group = useRecoilValue(Group);
   const count = useRecoilValue(Counter);
+  const evidence = useRecoilValue(EvidenceType);
 
   useEffect(() => {
     onSubmit();
@@ -79,6 +81,7 @@ const Contents: React.FC<Props> = () => {
     matches.sort,
     resource.sort,
     group.sort,
+    evidence.value,
   ]);
 
   return (

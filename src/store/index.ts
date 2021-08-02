@@ -26,6 +26,14 @@ export const Counter = atom<{ value: number; label: string }>({
   },
 });
 
+export const EvidenceType = atom<{ value: string; label: string }>({
+  key: 'EvidenceType',
+  default: {
+    value: 'ALL',
+    label: 'ALL',
+  },
+});
+
 export const StartTime = atom<TimeModel>({
   key: 'StartTime',
   default: {

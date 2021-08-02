@@ -2,12 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 import { useRecoilState } from 'recoil';
-import { Counter, Page } from '../../store';
+import { Counter, EvidenceType, Page } from '../../store';
 
 // Styles
 const Container = styled.div`
   display: flex;
+
   .counter {
+    min-width: 100px;
+    margin-right: 0.5rem;
+  }
+
+  .event {
     min-width: 100px;
   }
 `;
@@ -20,9 +26,17 @@ const options = [
   { value: 100, label: '100' },
 ];
 
+const evidenceOptions = [
+  { value: 'ALL', label: 'ALL' },
+  { value: 'EVENT', label: 'EVENT' },
+  { value: 'COLLECTION', label: 'COLLECTION' },
+];
+
 const LookupCounter: React.FC<Props> = () => {
   const [counter, setCounter] = useRecoilState(Counter);
+  const [evidenceType, setEvidenceType] = useRecoilState(EvidenceType);
   const [, setPage] = useRecoilState(Page);
+
 
   const onChange = (e: any) => {
     setCounter({ value: e.value, label: e.label });
@@ -32,6 +46,14 @@ const LookupCounter: React.FC<Props> = () => {
     }));
   };
 
+  const onChangeEvent = (e: any) => {
+    setEvidenceType({ value: e.value, label: e.label });
+    setPage((prev) => ({
+      ...prev,
+      currentPage: 0,
+    }));
+  }
+
   return (
     <Container>
       <Select
@@ -40,6 +62,14 @@ const LookupCounter: React.FC<Props> = () => {
         onChange={onChange}
         hideSelectedOptions={true}
         placeholder={counter.value}
+      />
+
+      <Select
+        className="event"
+        options={evidenceOptions}
+        onChange={onChangeEvent}
+        hideSelectedOptions={true}
+        placeholder={evidenceType.value}
       />
     </Container>
   );

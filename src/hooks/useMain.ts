@@ -24,9 +24,10 @@ import {
   ListTable,
   AuthUser,
   Total,
+  EvidenceType,
 } from '../store';
 
-const apiServer = '';
+const apiServer = 'http://3.34.5.214:8080';
 
 function useMain() {
   const time = useRecoilValue(Time);
@@ -45,6 +46,7 @@ function useMain() {
   const matches = useRecoilValue(Matches);
   const resource = useRecoilValue(Resource);
   const group = useRecoilValue(Group);
+  const evidenceType = useRecoilValue(EvidenceType);
 
   const [page, setPage] = useRecoilState(Page);
   const [, setListTable] = useRecoilState(ListTable);
@@ -114,6 +116,10 @@ function useMain() {
               ? `&endAgentTime=${moment(endAgentTime.date).format(
                   'YYYY-MM-DD'
                 )}`
+              : ''
+          }${
+            evidenceType.value !== 'ALL'
+              ? `&evidenceType=${evidenceType.value}`
               : ''
           }
             `,
@@ -202,6 +208,10 @@ function useMain() {
               ? `&endAgentTime=${moment(endAgentTime.date).format(
                   'YYYY-MM-DD'
                 )}`
+              : ''
+          }${
+            evidenceType.value !== 'ALL'
+              ? `&evidenceType=${evidenceType.value}`
               : ''
           }
             `,
