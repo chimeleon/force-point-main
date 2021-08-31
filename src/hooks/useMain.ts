@@ -25,6 +25,8 @@ import {
   AuthUser,
   Total,
   EvidenceType,
+  RangeFrom,
+  RangeTo,
 } from '../store';
 
 // http://3.34.5.214:8080
@@ -52,6 +54,8 @@ function useMain() {
   const [page, setPage] = useRecoilState(Page);
   const [, setListTable] = useRecoilState(ListTable);
   const [total, setTotal] = useRecoilState(Total);
+  const rangeFrom = useRecoilValue(RangeFrom);
+  const rangeTo = useRecoilValue(RangeTo);
   const authUser = useRecoilValue(AuthUser);
 
   const onPrevPage = () => {
@@ -84,7 +88,11 @@ function useMain() {
 
       await axios
         .get(
-          `${apiServer}/evidences/9/list?page=${page.currentPage}&size=${
+          `${apiServer}/evidences/9/list?page=${
+            page.currentPage
+          }&rangeFrom=${moment(rangeFrom.date).format(
+            'YYYY-MM-DD'
+          )}&rangeTo=${moment(rangeTo.date).format('YYYY-MM-DD')}&size=${
             counter.value
           }${user.value !== '' ? `&user=${user.value}` : ''}${
             agent.value !== '' ? `&agent=${agent.value}` : ''
@@ -176,7 +184,11 @@ function useMain() {
 
       await axios
         .get(
-          `${apiServer}/evidences/9/excel?page=${page.currentPage}&size=${
+          `${apiServer}/evidences/9/excel?page=${
+            page.currentPage
+          }&rangeFrom=${moment(rangeFrom.date).format(
+            'YYYY-MM-DD'
+          )}&rangeTo=${moment(rangeTo.date).format('YYYY-MM-DD')}&size=${
             counter.value
           }${user.value !== '' ? `&user=${user.value}` : ''}${
             agent.value !== '' ? `&agent=${agent.value}` : ''

@@ -1,5 +1,12 @@
 import { atom } from 'recoil';
 
+export const RangeFromDate = () => {
+  const today = new Date();
+  const target = today.getTime() - 7 * 24 * 60 * 60 * 1000;
+
+  return target;
+};
+
 export const AuthUser = atom<string | null>({
   key: 'AuthUser',
   default: '',
@@ -31,6 +38,20 @@ export const EvidenceType = atom<{ value: string; label: string }>({
   default: {
     value: 'ALL',
     label: 'ALL',
+  },
+});
+
+export const RangeFrom = atom<TimeModel>({
+  key: 'RangeFrom',
+  default: {
+    date: new Date(RangeFromDate()),
+  },
+});
+
+export const RangeTo = atom<TimeModel>({
+  key: 'RangeTo',
+  default: {
+    date: new Date(),
   },
 });
 
