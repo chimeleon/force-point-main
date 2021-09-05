@@ -15,11 +15,10 @@ interface Props {
   total: number;
 }
 
-const CounterTemplate: React.FC<Props> = ({ total }) => {
+const CounterTemplate: React.FC<Props> = () => {
   return (
     <Container>
       <LookupCounter />
-      <Total total={total} />
     </Container>
   );
 };

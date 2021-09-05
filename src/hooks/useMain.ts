@@ -27,6 +27,7 @@ import {
   EvidenceType,
   RangeFrom,
   RangeTo,
+  Loading,
 } from '../store';
 
 // http://3.34.5.214:8080
@@ -57,6 +58,7 @@ function useMain() {
   const rangeFrom = useRecoilValue(RangeFrom);
   const rangeTo = useRecoilValue(RangeTo);
   const authUser = useRecoilValue(AuthUser);
+  const [, setLoading] = useRecoilState(Loading);
 
   const onPrevPage = () => {
     setPage((prev) => ({ ...prev, currentPage: prev.currentPage - 1 }));
@@ -67,6 +69,8 @@ function useMain() {
   };
 
   const onSubmit = async () => {
+    setLoading(true);
+
     try {
       const sortArray = [
         { name: 'EVIDENCESTARTTIME', sort: time.sort },
@@ -154,12 +158,16 @@ function useMain() {
         })
         .catch((err) => {
           console.error(err);
+          setLoading(false);
 
           document.location.href = '/customLogin';
         });
     } catch (err) {
       toast(err);
+      setLoading(false);
     }
+
+    setLoading(false);
   };
 
   const onExcel = async () => {

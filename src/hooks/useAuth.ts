@@ -42,8 +42,6 @@ function useAuth() {
   useEffect(() => {
     const token = cookie.get('JSESSIONID');
 
-    console.log(token);
-
     if (!token) {
       document.location.href = '/customLogin';
     } else {

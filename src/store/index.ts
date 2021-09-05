@@ -7,6 +7,11 @@ export const RangeFromDate = () => {
   return target;
 };
 
+export const Loading = atom<boolean>({
+  key: 'Loading',
+  default: false,
+});
+
 export const AuthUser = atom<string | null>({
   key: 'AuthUser',
   default: '',
