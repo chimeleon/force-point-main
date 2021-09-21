@@ -104,7 +104,11 @@ const Contents: React.FC<Props> = () => {
                           {content.evidenceStartTime}
                         </td>
                         <td style={{ wordBreak: 'break-all' }}>
-                          {new Date(content.agentTime).toISOString()}
+                          {new Date(content.agentTime)
+                            .toLocaleString()
+                            .replaceAll(/\s/gi, '')
+                            .replace(/\.[가-힣]+/gi, ' ')
+                            .replaceAll('.', '-')}
                         </td>
                         <td style={{ wordBreak: 'break-all' }}>
                           {content.userDim.label}

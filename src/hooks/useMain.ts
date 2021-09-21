@@ -162,7 +162,7 @@ function useMain() {
 
           document.location.href = '/customLogin';
         });
-    } catch (err) {
+    } catch (err: any) {
       toast(err);
       setLoading(false);
     }
@@ -260,7 +260,7 @@ function useMain() {
           link.remove();
         })
         .catch((err) => console.log(err));
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err);
     }
   };
