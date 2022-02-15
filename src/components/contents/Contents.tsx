@@ -104,7 +104,7 @@ const Contents: React.FC<Props> = () => {
                           {content.evidenceStartTime}
                         </td>
                         <td style={{ wordBreak: 'break-all' }}>
-                          {new Date(content.agentTime)
+                          {new Date(new Date(content.agentTime).setMinutes(new Date().getTimezoneOffset()))
                             .toLocaleString()
                             .replaceAll(/\s/gi, '')
                             .replace(/\.[가-힣]+/gi, ' ')

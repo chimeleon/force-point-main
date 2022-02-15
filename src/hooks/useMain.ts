@@ -99,7 +99,7 @@ function useMain() {
           )}&rangeTo=${moment(rangeTo.date).format('YYYY-MM-DD')}&size=${
             counter.value
           }${user.value !== '' ? `&user=${user.value}` : ''}${
-            agent.value !== '' ? `&agent=${agent.value}` : ''
+            agent.value !== '' ? `&agent=${encodeURI(agent.value)}` : ''
           }${person.value !== '' ? `&person=${person.value}` : ''}${
             policy.value !== '' ? `&policy=${policy.value}` : ''
           }${
@@ -199,7 +199,7 @@ function useMain() {
           )}&rangeTo=${moment(rangeTo.date).format('YYYY-MM-DD')}&size=${
             counter.value
           }${user.value !== '' ? `&user=${user.value}` : ''}${
-            agent.value !== '' ? `&agent=${agent.value}` : ''
+            agent.value !== '' ? `&agent=${encodeURI(agent.value)}` : ''
           }${person.value !== '' ? `&person=${person.value}` : ''}${
             policy.value !== '' ? `&policy=${policy.value}` : ''
           }${
